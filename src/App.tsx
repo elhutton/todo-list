@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>To-Do List</h1>
+      <form>
+        <input type="text"></input>
+        <button type="submit">Add</button>
+      </form>
+      <div className="filters">
+        <button>All Tasks</button>
+        <button>Active Tasks</button>
+        <button>Completed Tasks</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ul className="tasks">
+        <li className="task">
+          <div className="task-check">
+            <input type="checkbox"></input>
+            <label>Do this task</label>
+          </div>
+          <div>
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </li>
+        <li className="task">
+          <div className="task-check">
+            <input type="checkbox"></input>
+            <label>Also this one</label>
+          </div>
+          <div>
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </li>
+        <li className="task">
+          <div className="task-check">
+            <input type="checkbox"></input>
+            <label>Don't forget this one</label>
+          </div>
+          <div>
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </li>
+      </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
