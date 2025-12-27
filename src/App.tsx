@@ -1,5 +1,8 @@
 import "./App.css";
 import Todo from "./components/Todo.tsx";
+import Form from "./components/Form.tsx";
+import { useState } from "react";
+import { nanoid } from "nanoid";
 
 type Task = {
   id: string;
@@ -7,14 +10,23 @@ type Task = {
   completed: boolean;
 };
 
-function App({ tasks }: { tasks: Array<Task> }) {
+function App({ data }: { data: Array<Task> }) {
+  const [tasks, setTasks] = useState(data);
+
+  function addTask(name: string) {
+    const task = {
+      name: name,
+      id: `todo-${nanoid()}`,
+      completed: false,
+    };
+
+    setTasks([...tasks, task]);
+  }
+
   return (
     <>
       <h1>To-Do List</h1>
-      <form>
-        <input type="text"></input>
-        <button type="submit">Add</button>
-      </form>
+      <Form addTask={addTask} />
       <div className="filters">
         <button>All Tasks</button>
         <button>Active Tasks</button>
