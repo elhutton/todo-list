@@ -23,6 +23,18 @@ function App({ data }: { data: Array<Task> }) {
     setTasks([...tasks, task]);
   }
 
+  function toggleTask(id: string) {
+    const updated = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, completed: !task.completed };
+      }
+
+      return task;
+    });
+
+    setTasks(updated);
+  }
+
   return (
     <>
       <h1>To-Do List</h1>
@@ -34,7 +46,7 @@ function App({ data }: { data: Array<Task> }) {
       </div>
       <ul className="tasks">
         {tasks?.map((task: Task) => (
-          <Todo {...task} key={task.id} />
+          <Todo {...task} key={task.id} toggleTask={toggleTask} />
         ))}
       </ul>
     </>
