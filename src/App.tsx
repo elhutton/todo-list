@@ -1,7 +1,13 @@
 import "./App.css";
 import Todo from "./components/Todo.tsx";
 
-function App() {
+type Task = {
+  id: string;
+  name: string;
+  completed: boolean;
+};
+
+function App({ tasks }: { tasks: Array<Task> }) {
   return (
     <>
       <h1>To-Do List</h1>
@@ -15,9 +21,9 @@ function App() {
         <button>Completed Tasks</button>
       </div>
       <ul className="tasks">
-        <Todo id="todo-1" name="Do this" completed />
-        <Todo id="todo-2" name="And this" />
-        <Todo id="todo-3" name="Also this" />
+        {tasks?.map((task: Task) => (
+          <Todo {...task} key={task.id} />
+        ))}
       </ul>
     </>
   );

@@ -7,7 +7,6 @@ function Todo({
   completed?: boolean;
   id: string;
 }) {
-  console.log(completed);
   return (
     <li className="task">
       <div className="task-check">
