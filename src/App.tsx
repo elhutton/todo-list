@@ -1,4 +1,5 @@
 import "./App.css";
+import Todo from "./components/Todo.tsx";
 
 function App() {
   return (
@@ -14,36 +15,9 @@ function App() {
         <button>Completed Tasks</button>
       </div>
       <ul className="tasks">
-        <li className="task">
-          <div className="task-check">
-            <input type="checkbox"></input>
-            <label>Do this task</label>
-          </div>
-          <div>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </li>
-        <li className="task">
-          <div className="task-check">
-            <input type="checkbox"></input>
-            <label>Also this one</label>
-          </div>
-          <div>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </li>
-        <li className="task">
-          <div className="task-check">
-            <input type="checkbox"></input>
-            <label>Don't forget this one</label>
-          </div>
-          <div>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </li>
+        <Todo id="todo-1" name="Do this" completed />
+        <Todo id="todo-2" name="And this" />
+        <Todo id="todo-3" name="Also this" />
       </ul>
     </>
   );
