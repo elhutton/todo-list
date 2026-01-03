@@ -8,6 +8,7 @@ type Task = {
   id: string;
   name: string;
   completed: boolean;
+  editing: boolean;
 };
 
 const filters = new Map([
@@ -31,6 +32,7 @@ function App({ data }: { data: Array<Task> }) {
       name: name,
       id: `todo-${nanoid()}`,
       completed: false,
+      editing: false,
     };
 
     setTasks([...tasks, task]);
@@ -53,6 +55,30 @@ function App({ data }: { data: Array<Task> }) {
     setTasks(updated);
   }
 
+  function renameTask(id: string, name: string) {
+    const renamed = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, name, editing: false };
+      }
+
+      return task;
+    });
+
+    setTasks(renamed);
+  }
+
+  function editTask(id: string) {
+    const updated = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, editing: true };
+      }
+
+      return task;
+    });
+
+    setTasks(updated);
+  }
+
   const filterFunction = filters.get(filter) || ((task: Task) => true);
 
   return (
@@ -71,8 +97,11 @@ function App({ data }: { data: Array<Task> }) {
           <Todo
             {...task}
             key={task.id}
+            editing={task.editing}
             toggleTask={toggleTask}
             deleteTask={deleteTask}
+            renameTask={renameTask}
+            editTask={editTask}
           />
         ))}
       </ul>
