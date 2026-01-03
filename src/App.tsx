@@ -10,8 +10,21 @@ type Task = {
   completed: boolean;
 };
 
+const filters = new Map([
+  ["ALL", (task: Task) => true],
+  ["ACTIVE", (task: Task) => !task.completed],
+  ["COMPLETED", (task: Task) => task.completed],
+]);
+
 function App({ data }: { data: Array<Task> }) {
   const [tasks, setTasks] = useState(data);
+  const [filter, setFilter] = useState("ALL");
+
+  function changeFilter(name: string) {
+    if (filters.has(name)) {
+      setFilter(name);
+    }
+  }
 
   function addTask(name: string) {
     const task = {
@@ -40,17 +53,21 @@ function App({ data }: { data: Array<Task> }) {
     setTasks(updated);
   }
 
+  const filterFunction = filters.get(filter) || ((task: Task) => true);
+
   return (
     <>
       <h1>To-Do List</h1>
       <Form addTask={addTask} />
       <div className="filters">
-        <button>All Tasks</button>
-        <button>Active Tasks</button>
-        <button>Completed Tasks</button>
+        <button onClick={() => changeFilter("ALL")}>All Tasks</button>
+        <button onClick={() => changeFilter("ACTIVE")}>Active Tasks</button>
+        <button onClick={() => changeFilter("COMPLETED")}>
+          Completed Tasks
+        </button>
       </div>
       <ul className="tasks">
-        {tasks?.map((task: Task) => (
+        {tasks?.filter(filterFunction).map((task: Task) => (
           <Todo
             {...task}
             key={task.id}
