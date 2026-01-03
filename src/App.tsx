@@ -35,6 +35,11 @@ function App({ data }: { data: Array<Task> }) {
     setTasks(updated);
   }
 
+  function deleteTask(id: string) {
+    const updated = tasks.filter((task) => task.id !== id);
+    setTasks(updated);
+  }
+
   return (
     <>
       <h1>To-Do List</h1>
@@ -46,7 +51,12 @@ function App({ data }: { data: Array<Task> }) {
       </div>
       <ul className="tasks">
         {tasks?.map((task: Task) => (
-          <Todo {...task} key={task.id} toggleTask={toggleTask} />
+          <Todo
+            {...task}
+            key={task.id}
+            toggleTask={toggleTask}
+            deleteTask={deleteTask}
+          />
         ))}
       </ul>
     </>

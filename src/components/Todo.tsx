@@ -3,14 +3,20 @@ function Todo({
   completed,
   id,
   toggleTask,
+  deleteTask,
 }: {
   name: string;
   completed?: boolean;
   id: string;
   toggleTask: (id: string) => void;
+  deleteTask: (id: string) => void;
 }) {
   function handleToggle() {
     toggleTask(id);
+  }
+
+  function handleDelete() {
+    deleteTask(id);
   }
 
   return (
@@ -26,7 +32,7 @@ function Todo({
       </div>
       <div>
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
     </li>
   );
